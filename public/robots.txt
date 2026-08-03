@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://demo.example/ipra/sitemap.xml

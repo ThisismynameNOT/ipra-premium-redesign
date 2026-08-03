@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import { localize, filterProjects, validateEnquiry } from '../dist/assets/lib.js';import { projects } from '../dist/assets/data.js';
+test('localizes Czech and English content',()=>{assert.equal(localize({cs:'Střecha',en:'Roof'},'en'),'Roof');assert.equal(localize({cs:'Střecha',en:'Roof'},'cs'),'Střecha')});
+test('filters foundation projects',()=>{const result=filterProjects(projects,'foundation');assert.ok(result.length>=2);assert.ok(result.every(x=>x.category==='foundation'))});
+test('validates technical enquiry in English',()=>{const errors=validateEnquiry({},'en');assert.equal(errors.email,'Enter a valid email.');assert.ok(errors.project)});
+test('accepts complete technical enquiry',()=>{assert.deepEqual(validateEnquiry({project:'Office building',phase:'Design',solution:'Foundation pit waterproofing technical review',location:'Prague',area:1200,documentation:'available',date:'2026-09-01',name:'Eva Novak',email:'eva@example.com',phone:'+420777111222'},'en'),{})});
